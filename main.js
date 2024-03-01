@@ -79,11 +79,29 @@ function initGallows() {
 }
 
 function checkLetter(letter) {
-    incorrectAns++
-    console.log(letter, incorrectAns)
+    const letters = document.querySelectorAll('.word__letter')
+    const wordArr = secretWord.split('')
+    const uniqueLetters = [...new Set(wordArr)]
+    const mistakes = document.querySelector('#mistakes')
+    if (wordArr.includes(letter)) {
+        wordArr.forEach((el, i) => {
+            if (el === letter) {
+                letters[i].innerHTML = letter
+            }
+        })
+        correctAns++
+    }
+    else {
+        incorrectAns++
+        gallowsChange(incorrectAns)
+        mistakes.innerHTML = incorrectAns + '/6'
+    }
+    console.log('cor', correctAns, 'incor', incorrectAns)
     if(incorrectAns === 6) {
-        endGame(false)
-        incorrectAns = 0
+        setTimeout(endGame, 500)
+    }
+    if (correctAns === uniqueLetters.length) {
+        endGame(true)
     }
 }
 
