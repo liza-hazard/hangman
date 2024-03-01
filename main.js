@@ -38,3 +38,31 @@ function startGame() {
     `;
     
 }
+
+function initKeyboard(board) {
+    keys.forEach((el) => {
+        board.innerHTML += `<div class="keyboard__letter" data-key="${el}">${String.fromCharCode(el)}</div>`
+    })
+    board.addEventListener('click', (ev) => {
+        if (ev.target.classList.contains("keyboard__letter")) {
+            pressKey(+ev.target.getAttribute('data-key'))
+        }
+    })
+    document.addEventListener('keypress', (ev) => {
+        if (keys.includes(+ev.charCode)) {
+            pressKey(+ev.charCode)
+        }
+    })
+    function pressKey(code) {
+        const letter = document.querySelector('.keyboard__letter[data-key="' + code + '"]')
+        if (letter.classList.contains('keyboard__letter--active')) {
+            return
+        }
+        letter.classList.add('keyboard__letter--active')
+        checkLetter(String.fromCharCode(code))
+    }
+}
+
+function initWord(word) {
+    console.log(word)
+}
