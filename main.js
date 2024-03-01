@@ -13,7 +13,7 @@ gameBlock.append(gameStartBtn)
 
 const gameBtn = document.querySelector('.btn--start')
 
-gameBtn.addEventListener('click', (ev) => {
+gameBtn.addEventListener('click', () => {
     gameBtn.style.display = 'none'
     gameBlock.innerHTML += `
     <div class="game__block game__block--gallows gallows">
@@ -29,19 +29,13 @@ gameBtn.addEventListener('click', (ev) => {
 })
 
 const keys = [113, 119, 101, 114, 116, 121, 117, 105, 111, 112, 97, 115, 100, 102, 103, 104, 106, 107, 108, 122, 120, 99, 118, 98, 110, 109]
-// document.onkeypress = (event) => {
-//     keys.push(event.charCode)
-//     console.log(keys)
-// }
-
-
-
 
 function startGame(secret) {
     initGallows()
     initKeyboard(document.querySelector('#keyboard'))
     initWord(secret)
     initMistakes()
+    initModal()
 }
 
 function initKeyboard(board) {
@@ -89,6 +83,16 @@ function initGallows() {
     gallows.innerHTML = '<img class="gallows__image gallows__image--main" src="assets/gallows.png">'
 }
 
+function initModal() {
+    const mainModal = document.createElement('div')
+    const overlay = document.createElement('div')
+    mainModal.classList.add('modal')
+    overlay.classList.add('overlay')
+    mainModal.innerHTML = `<div class="modal__body"></div>`
+    document.body.append(mainModal)
+    document.body.append(overlay)
+}
+
 function checkLetter(letter) {
     const letters = document.querySelectorAll('.word__letter')
     const wordArr = secretWord.split('')
@@ -107,7 +111,6 @@ function checkLetter(letter) {
         gallowsChange(incorrectAns)
         mistakes.innerHTML = incorrectAns + '/6'
     }
-    console.log('cor', correctAns, 'incor', incorrectAns)
     if(incorrectAns === 6) {
         setTimeout(endGame, 500)
     }
@@ -143,9 +146,34 @@ function gallowsChange(mistake) {
 
 function endGame(result = false) {
     document.querySelectorAll('.keyboard__letter').forEach((el) => el.classList.remove('keyboard__letter--active'))
-    console.log(result)
     incorrectAns = 0
     correctAns = 0
+    openModal(result, secretWord)
+}
+
+function openModal(result, word) {
+    const modalBody = document.querySelector('.modal__body')
+    const restartBtn = document.createElement('button')
+
+    restartBtn.classList.add('restart')
+    restartBtn.innerHTML = 'Play again'
+    restartBtn.addEventListener('click', restartGame)
+
+    document.querySelector('.modal').classList.add('open')
+    document.querySelector('.overlay').classList.add('open')
+    if (result) {
+        modalBody.innerHTML = 'You win'
+    }
+    else {
+        modalBody.innerHTML = 'You fail'
+    }
+    modalBody.append(restartBtn)
+}
+
+function restartGame() {
+    document.querySelector('.modal').classList.remove('open')
+    document.querySelector('.overlay').classList.remove('open')
     startGame(secretWord)
 }
+
 
