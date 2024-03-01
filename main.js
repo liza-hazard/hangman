@@ -36,7 +36,8 @@ function startGame() {
         <div id="keyboard" class="keyboard"></div>
     </div>
     `;
-    
+    initKeyboard(document.querySelector('#keyboard'))
+    // initWord(secretWord)
 }
 
 function initKeyboard(board) {
@@ -65,4 +66,23 @@ function initKeyboard(board) {
 
 function initWord(word) {
     console.log(word)
+}
+
+function initMistakes() {
+    const mistakes = document.querySelector('#mistakes')
+    mistakes.innerHTML = '0/6'
+}
+
+function initGallows() {
+    const gallows = document.querySelector('.game__block--gallows')
+    gallows.innerHTML = '<img class="gallows__image gallows__image--main" src="/assets/gallows.png">'
+}
+
+function checkLetter(letter) {
+    incorrectAns++
+    console.log(letter, incorrectAns)
+    if(incorrectAns === 6) {
+        endGame(false)
+        incorrectAns = 0
+    }
 }
