@@ -49,7 +49,7 @@ function initKeyboard(board) {
     keys.forEach((el) => {
         board.innerHTML += `<div class="keyboard__letter" data-key="${el}">${String.fromCharCode(el)}</div>`
     })
-    document.querySelectorAll('.keyboard__letter').forEach((el) => el.classList.remove('keyboard__letter--active'))
+    document.querySelectorAll('.keyboard__letter').forEach((el) => {el.classList.remove('keyboard__letter--active')});
     board.addEventListener('click', (ev) => {
         if (ev.target.classList.contains("keyboard__letter")) {
             pressKey(+ev.target.getAttribute('data-key'))
@@ -112,7 +112,8 @@ function checkLetter(letter) {
         setTimeout(endGame, 500)
     }
     if (correctAns === uniqueLetters.length) {
-        endGame(true)
+        setTimeout(() => {endGame(true)}, 500)
+        
     }
 }
 
