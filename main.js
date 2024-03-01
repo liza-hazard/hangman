@@ -78,6 +78,30 @@ function initGallows() {
     gallows.innerHTML = '<img class="gallows__image gallows__image--main" src="/assets/gallows.png">'
 }
 
+function gallowsChange(mistake) {
+    const gallows = document.querySelector('.game__block--gallows')
+    switch(mistake) {
+        case 1:
+            gallows.innerHTML += '<img class="gallows__image gallows__image--head" src="/assets/head.png">'
+            break;
+        case 2:
+            gallows.innerHTML += '<img class="gallows__image gallows__image--body" src="/assets/body.png">'
+            break;
+        case 3:
+            gallows.innerHTML += '<img class="gallows__image gallows__image--leftH" src="/assets/left-hand.png">'
+            break;
+        case 4:
+            gallows.innerHTML += '<img class="gallows__image gallows__image--rightH" src="/assets/right-hand.png">'
+            break;
+        case 5:
+            gallows.innerHTML += '<img class="gallows__image gallows__image--leftL" src="/assets/left-leg.png">'
+            break;
+        case 6:
+            gallows.innerHTML += '<img class="gallows__image gallows__image--rightL" src="/assets/right-leg.png">'
+            break;
+    }
+}
+
 function checkLetter(letter) {
     const letters = document.querySelectorAll('.word__letter')
     const wordArr = secretWord.split('')
