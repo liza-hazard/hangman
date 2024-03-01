@@ -86,3 +86,11 @@ function checkLetter(letter) {
         incorrectAns = 0
     }
 }
+
+function endGame(result = false) {
+    document.querySelectorAll('.keyboard__letter').forEach((el) => el.classList.remove('keyboard__letter--active'))
+    console.log(result)
+    incorrectAns = 0
+    correctAns = 0
+    startGame(secretWord)
+}
