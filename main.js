@@ -1,4 +1,4 @@
-import { words }  from './words.json' assert { type: "json" };
+import { words }  from './words.js' 
 const gameBlock = document.querySelector('#game')
 const gameStartBtn = document.createElement('button')
 let secretWord = 'secret'
