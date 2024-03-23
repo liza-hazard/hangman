@@ -1,4 +1,4 @@
-const words = JSON.parse(`[
+export const words = JSON.parse(`[
     {
         "word": "secret",
         "hint": "secret is a word"
