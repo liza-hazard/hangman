@@ -1,4 +1,4 @@
-const words = JSON.parse([
+const words = JSON.parse(`[
     {
         "word": "secret",
         "hint": "secret is a word"
@@ -23,4 +23,4 @@ const words = JSON.parse([
         "word": "ship",
         "hint": "ship is a word"
     }
-])
+]`)
